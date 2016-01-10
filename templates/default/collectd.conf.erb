@@ -5,15 +5,21 @@
 
 Hostname "<%= @name %>"
 FQDNLookup <%= @fqdnlookup %>
-BaseDir "<%= @dir %>"
-PluginDir "<%= @dir %>/lib/collectd"
-TypesDB "<%= @dir %>/share/collectd/types.db"
+BaseDir "/var/lib/collectd"
+PluginDir "/usr/lib/collectd"
+TypesDB "/usr/share/collectd/types.db"
 Interval <%= @interval %>
 ReadThreads <%= @read_threads %>
 WriteQueueLimitHigh <%= @write_queue_limit_high %>
 WriteQueueLimitLow <%= @write_queue_limit_low %>
 CollectInternalStats <%= @collect_internal_stats %>
 
+LoadPlugin syslog
+<Plugin syslog>
+  LogLevel info
+  NotifyLevel OKAY
+</Plugin>
+
 <% unless @plugins.empty? %>
-Include "<%= @dir %>/etc/conf.d/*.conf"
+Include "/etc/collectd/collectd.conf.d/*.conf"
 <% end %>

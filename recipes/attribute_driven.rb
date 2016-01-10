@@ -27,6 +27,7 @@ node["collectd"]["plugins"].each_pair do |plugin_key, definition|
     config definition["config"].to_hash if definition["config"]
     template definition["template"].to_s if definition["template"]
     cookbook definition["cookbook"].to_s if definition["cookbook"]
+    noquote definition["noquote"]
     notifies :restart, "service[collectd]"
   end
 end
@@ -38,6 +39,15 @@ node["collectd"]["python_plugins"].each_pair do |plugin_key, definition|
     typesdb definition["typesdb"].to_s if definition["typesdb"]
     config definition["config"].to_hash
     module_config definition["module_config"].to_hash
+    template definition["template"].to_s if definition["template"]
+    cookbook definition["cookbook"].to_s if definition["cookbook"]
+    notifies :restart, "service[collectd]"
+  end
+end
+
+node["collectd"]["java_plugins"].each_pair do |plugin_key, definition|
+  collectd_ng_java_plugin plugin_key.to_s do
+    config definition["config"].to_hash
     template definition["template"].to_s if definition["template"]
     cookbook definition["cookbook"].to_s if definition["cookbook"]
     notifies :restart, "service[collectd]"

@@ -3,7 +3,7 @@ maintainer        "Hector Castro"
 maintainer_email  "hectcastro@gmail.com"
 license           "Apache 2.0"
 description       "Installs and configures collectd."
-version           "2.0.0"
+version           "2.0.1"
 recipe            "collectd", "Installs and configures collectd"
 recipe            "collectd::attribute_driven", "Installs collectd plugins via node attributes"
 recipe            "collectd::packages", "Installs collectd via packages"
@@ -12,6 +12,8 @@ recipe            "collectd::recompile", "Attempts to recompile collectd"
 %w{ build-essential yum-epel }.each do |d|
   depends d
 end
+
+depends 'packagecloud', '~> 0.1.0'
 
 %w{ amazon centos fedora redhat scientific ubuntu }.each do |os|
   supports os

@@ -16,4 +16,12 @@ if defined?(ChefSpec)
   def delete_collectd_python_plugin(name)
     ChefSpec::Matchers::ResourceMatcher.new(:collectd_ng_plugin, :delete, name)
   end
+
+  def create_collectd_java_plugin(name)
+    ChefSpec::Matchers::ResourceMatcher.new(:collectd_ng_plugin, :create, name)
+  end
+
+  def delete_collectd_java_plugin(name)
+    ChefSpec::Matchers::ResourceMatcher.new(:collectd_ng_plugin, :delete, name)
+  end
 end
